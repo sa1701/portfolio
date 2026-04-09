@@ -105,6 +105,42 @@ const PROJECTS: Project[] = [
     tech: ["Node.js", "Express", "MySQL", "Session Auth", "HTML/CSS"],
     github: "https://github.com/sa1701/employee-management-system",
   },
+  {
+    title: "ai-commit",
+    icon: "⚡",
+    accentHex: "#fbbf24",
+    accentText: "text-[#fbbf24]",
+    accentBorder: "border-[#fbbf24]/[0.15]",
+    shadowGlow: "shadow-glow-yellow",
+    description:
+      "CLI tool that generates conventional git commit messages from staged diffs using a local Ollama LLM. Supports model selection, dry-run mode, and inline message editing.",
+    tech: ["Python", "Click", "Ollama", "Git"],
+    github: "https://github.com/sa1701/ai-commit",
+  },
+  {
+    title: "Notebook CLI",
+    icon: "🗒️",
+    accentHex: "#2dd4bf",
+    accentText: "text-[#2dd4bf]",
+    accentBorder: "border-[#2dd4bf]/[0.15]",
+    shadowGlow: "shadow-glow-teal",
+    description:
+      "Command-line note-taking app with tag-based search, persistent JSON storage, and a clean menu-driven interface. Built with OOP principles.",
+    tech: ["Python", "OOP", "JSON"],
+    github: "https://github.com/sa1701/notebook-cli",
+  },
+  {
+    title: "Big Data ML",
+    icon: "📊",
+    accentHex: "#f87171",
+    accentText: "text-[#f87171]",
+    accentBorder: "border-[#f87171]/[0.15]",
+    shadowGlow: "shadow-glow-red",
+    description:
+      "Decision tree classifier built from scratch (info gain + Gini impurity) with weighted ensemble methods. Applied to UCI Heart Disease and Solar Flare datasets.",
+    tech: ["Python", "scikit-learn", "pandas", "NumPy", "Jupyter"],
+    github: "https://github.com/sa1701/big-data-ml",
+  },
 ];
 
 // ---------------------------------------------------------------------------
