@@ -5,14 +5,14 @@ import { motion, useInView } from "framer-motion";
 
 const CAMPUSES = [
   {
-    period: "2025 — present",
-    place: "University of Wollongong — main campus",
-    location: "Wollongong, NSW, Australia",
-  },
-  {
-    period: "Sep 2023 — 2025",
+    period: "Sep 2023 — Dec 2024",
     place: "University of Wollongong in Dubai",
     location: "Dubai, UAE",
+  },
+  {
+    period: "Feb 2025 — present",
+    place: "University of Wollongong — main campus",
+    location: "Wollongong, NSW, Australia",
   },
 ];
 
@@ -95,8 +95,8 @@ export default function Education() {
               </p>
               <p className="text-muted text-sm leading-relaxed mt-3 max-w-2xl">
                 One degree, two campuses: commenced at UOW Dubai in September
-                2023, then transferred to the main Wollongong campus in 2025 to
-                finish in Australia. Coursework spans big data mining,
+                2023, then transferred to the main Wollongong campus in
+                February 2025 to finish in Australia. Coursework spans big data mining,
                 generative AI, software methodologies, cybersecurity, and a
                 year-long capstone combining NLP with program analysis.
               </p>
