@@ -26,6 +26,7 @@ const PROJECTS: Project[] = [
     description:
       "Describe a symptom or fault code, get interviewed like a mechanic, then receive a cited fix with the actual workshop-manual diagram. RAG over 22 service manuals (2,450 indexed chunks) with page-level citations on every answer, and a multimodal model that reads labelled engineering diagrams. Designed so adding a car is as simple as dropping in a PDF.",
     tech: ["Python", "FastAPI", "RAG", "Multimodal LLM", "ChromaDB", "PyMuPDF"],
+    github: "https://github.com/sa1701/gearhead",
   },
   {
     title: "ZynTrace",
