@@ -2,203 +2,169 @@
 
 import { motion } from "framer-motion";
 
-export default function Hero() {
-  const handleScrollToProjects = () => {
-    const el = document.getElementById("projects");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
+const TICKER = [
+  "Python",
+  "RAG Pipelines",
+  "FastAPI",
+  "Multimodal LLMs",
+  "TypeScript",
+  "Next.js",
+  "ChromaDB",
+  "TensorFlow",
+  "Spark",
+  "Program Analysis",
+  "NLP",
+  "PostgreSQL",
+];
 
-  const handleScrollDown = () => {
-    const el = document.getElementById("about");
+const rise = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: 0.12 * i, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
+
+export default function Hero() {
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section
       aria-label="Introduction"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden gradient-bg"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
     >
-      {/* Decorative gradient orbs */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute -top-40 -left-40 w-96 h-96 rounded-full opacity-20"
-          style={{
-            background: "radial-gradient(circle, #7c4dff 0%, transparent 70%)",
-          }}
-          animate={{ scale: [1, 1.15, 1], opacity: [0.18, 0.28, 0.18] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" as const }}
-        />
-        <motion.div
-          className="absolute top-1/4 -right-32 w-80 h-80 rounded-full opacity-15"
-          style={{
-            background: "radial-gradient(circle, #4fc3f7 0%, transparent 70%)",
-          }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.12, 0.22, 0.12] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" as const, delay: 1.5 }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 left-1/4 w-64 h-64 rounded-full opacity-12"
-          style={{
-            background: "radial-gradient(circle, #f472b6 0%, transparent 70%)",
-          }}
-          animate={{ scale: [1, 1.1, 1], opacity: [0.08, 0.16, 0.08] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" as const, delay: 3 }}
-        />
-        {/* Subtle grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(79,195,247,1) 1px, transparent 1px), linear-gradient(90deg, rgba(79,195,247,1) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
+      {/* Drawing-sheet frame annotations */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden sm:block">
+        <span className="spec-label absolute top-20 left-6 lg:left-10">
+          Doc. SA-2026 / Rev 07
+        </span>
+        <span className="spec-label absolute top-20 right-6 lg:right-10 text-right">
+          Sydney, AU
+          <br />
+          33.87°S — 151.21°E
+        </span>
+        <span className="spec-label absolute bottom-24 left-6 lg:left-10">
+          Sheet 01 / 05
+        </span>
+        {/* Registration crosses */}
+        <span className="absolute top-[4.5rem] left-1/2 -translate-x-1/2 text-muted/40 font-mono text-xs">
+          +
+        </span>
+        <span className="absolute bottom-20 left-1/2 -translate-x-1/2 text-muted/40 font-mono text-xs">
+          +
+        </span>
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        {/* Eyebrow label */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 w-full pt-24 pb-32">
+        {/* Status */}
         <motion.div
-          className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full glass-card border border-[#4fc3f7]/20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          custom={0}
+          variants={rise}
+          initial="hidden"
+          animate="visible"
+          className="inline-flex items-center gap-2.5 mb-10 border border-line px-3.5 py-2 bg-carbon-2"
         >
-          <span className="w-2 h-2 rounded-full bg-[#4fc3f7] animate-pulse-slow" aria-hidden="true" />
-          <span className="text-sm text-[#9999b8] font-mono tracking-wider">
-            Available for opportunities
+          <span className="status-dot w-1.5 h-1.5 rounded-full bg-ok" aria-hidden="true" />
+          <span className="spec-label !text-ink/80">
+            Open to 2027 graduate roles &amp; internships — Sydney
           </span>
         </motion.div>
 
         {/* Name */}
         <motion.h1
-          className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-4 glow-text"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
+          custom={1}
+          variants={rise}
+          initial="hidden"
+          animate="visible"
+          className="font-display font-black text-ink leading-[0.92] tracking-tight text-[clamp(3.5rem,12vw,9.5rem)]"
         >
-          <span className="gradient-text">Seif Ali</span>
+          Seif Ali
         </motion.h1>
 
-        {/* Title */}
+        {/* Statement */}
         <motion.p
-          className="text-xl sm:text-2xl lg:text-3xl font-semibold text-[#e8e8f0] mb-3"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          custom={2}
+          variants={rise}
+          initial="hidden"
+          animate="visible"
+          className="mt-8 max-w-2xl font-display text-[clamp(1.35rem,3vw,2rem)] leading-snug text-ink/90"
         >
-          Computer Science{" "}
-          <span className="text-[#4fc3f7]">|</span> AI &amp; Big Data
+          Builds AI systems that run{" "}
+          <em className="text-signal not-italic font-display italic">
+            where the data lives
+          </em>
+          .
         </motion.p>
 
-        {/* University */}
         <motion.p
-          className="text-base sm:text-lg text-[#9999b8] mb-10 flex items-center justify-center gap-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.42 }}
+          custom={3}
+          variants={rise}
+          initial="hidden"
+          animate="visible"
+          className="mt-5 max-w-xl text-muted text-base leading-relaxed"
         >
-          <svg
-            aria-hidden="true"
-            className="w-4 h-4 text-[#4fc3f7] flex-shrink-0"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-              clipRule="evenodd"
-            />
-          </svg>
-          University of Wollongong, Australia
+          Final-year Computer Science (AI &amp; Big Data) at the University of
+          Wollongong. Grounded RAG pipelines, local-first tools, and full-stack
+          applications — engineered to cite their sources, not guess.
         </motion.p>
 
-        {/* CTA buttons */}
+        {/* CTAs */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.55 }}
+          custom={4}
+          variants={rise}
+          initial="hidden"
+          animate="visible"
+          className="mt-12 flex flex-wrap items-center gap-4"
         >
           <button
-            onClick={handleScrollToProjects}
-            className="group relative px-8 py-3.5 rounded-xl font-semibold text-[#0a0a1a] bg-gradient-to-r from-[#4fc3f7] via-[#7c4dff] to-[#f472b6] hover:opacity-90 transition-all duration-200 shadow-glow-cyan focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a1a] min-w-[160px]"
-            aria-label="Scroll to projects section"
+            onClick={() => scrollTo("projects")}
+            className="group bg-signal text-carbon font-mono text-xs tracking-[0.16em] uppercase px-7 py-4 hover:bg-ink transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-carbon"
+            aria-label="Scroll to selected work"
           >
-            <span className="relative flex items-center justify-center gap-2">
-              View Projects
-              <svg
-                aria-hidden="true"
-                className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+            View selected work{" "}
+            <span className="inline-block group-hover:translate-y-0.5 transition-transform">
+              ↓
             </span>
           </button>
-
           <a
-            href="/Seif_Ali_CV_v3.pdf"
+            href="/Seif-Ali-CV.pdf"
             download
-            className="px-8 py-3.5 rounded-xl font-semibold text-[#e8e8f0] glass-card border border-[#4fc3f7]/30 hover:border-[#4fc3f7]/60 hover:bg-[#4fc3f7]/5 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4fc3f7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a1a] min-w-[160px] text-center"
-            aria-label="Download Seif Ali's CV as PDF"
+            className="border border-line-strong text-ink font-mono text-xs tracking-[0.16em] uppercase px-7 py-4 hover:border-signal hover:text-signal transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 focus-visible:ring-offset-carbon"
+            aria-label="Download CV as PDF"
           >
-            <span className="flex items-center justify-center gap-2">
-              <svg
-                aria-hidden="true"
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              Download CV
-            </span>
+            Download CV ↧
           </a>
-        </motion.div>
-
-        {/* Tech stack hint */}
-        <motion.div
-          className="mt-12 flex flex-wrap justify-center gap-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.75 }}
-          aria-label="Key technologies"
-        >
-          {["Python", "Node.js", "AI/ML", "SQL", "JavaScript"].map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 text-xs font-mono text-[#9999b8] glass-card rounded-full border border-white/[0.06]"
-            >
-              {tech}
-            </span>
-          ))}
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.button
-        onClick={handleScrollDown}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-[#9999b8] hover:text-[#4fc3f7] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4fc3f7] rounded-lg p-2"
+      {/* Ticker strip */}
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        aria-label="Scroll to about section"
+        transition={{ delay: 0.9, duration: 0.8 }}
+        className="marquee absolute bottom-0 left-0 right-0 border-t border-b border-line bg-carbon-2 overflow-hidden py-3.5"
+        aria-hidden="true"
       >
-        <span className="text-xs font-mono tracking-widest uppercase">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" as const }}
-          aria-hidden="true"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-          </svg>
-        </motion.div>
-      </motion.button>
+        <div className="marquee-track">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex shrink-0">
+              {TICKER.map((item) => (
+                <span
+                  key={`${copy}-${item}`}
+                  className="font-mono text-xs tracking-[0.2em] uppercase text-muted px-8 whitespace-nowrap"
+                >
+                  {item} <span className="text-signal ml-8">▪</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }

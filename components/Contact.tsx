@@ -3,80 +3,39 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-const CONTACT_LINKS = [
+const CHANNELS = [
   {
     label: "Email",
     value: "seifarafa@hotmail.com",
     href: "mailto:seifarafa@hotmail.com",
-    accent: "text-[#4fc3f7]",
-    border: "border-[#4fc3f7]/25",
-    hoverBorder: "hover:border-[#4fc3f7]/50",
-    hoverBg: "hover:bg-[#4fc3f7]/5",
-    icon: (
-      <svg
-        aria-hidden="true"
-        className="w-5 h-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1.5}
-          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-        />
-      </svg>
-    ),
+    external: false,
   },
   {
     label: "LinkedIn",
-    value: "seif-arafa-086744290",
+    value: "in/seif-arafa-086744290",
     href: "https://www.linkedin.com/in/seif-arafa-086744290",
-    accent: "text-[#7c4dff]",
-    border: "border-[#7c4dff]/25",
-    hoverBorder: "hover:border-[#7c4dff]/50",
-    hoverBg: "hover:bg-[#7c4dff]/5",
-    icon: (
-      <svg
-        aria-hidden="true"
-        className="w-5 h-5"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
+    external: true,
   },
   {
     label: "GitHub",
     value: "github.com/sa1701",
     href: "https://github.com/sa1701",
-    accent: "text-[#e8e8f0]",
-    border: "border-white/[0.12]",
-    hoverBorder: "hover:border-white/[0.25]",
-    hoverBg: "hover:bg-white/[0.03]",
-    icon: (
-      <svg
-        aria-hidden="true"
-        className="w-5 h-5"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-      </svg>
-    ),
+    external: true,
   },
 ];
 
 const containerVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.1 } },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const },
+  },
 };
 
 export default function Contact() {
@@ -88,105 +47,105 @@ export default function Contact() {
       id="contact"
       ref={ref}
       aria-labelledby="contact-heading"
-      className="py-24 px-6"
+      className="pt-28 px-6"
     >
-      <div className="max-w-2xl mx-auto text-center">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {/* Section heading */}
-          <motion.div variants={itemVariants} className="mb-6">
-            <p className="text-sm font-mono text-[#f472b6] tracking-widest uppercase mb-3">
-              Let&apos;s connect
-            </p>
+          {/* Section header */}
+          <motion.div
+            variants={itemVariants}
+            className="flex items-baseline gap-4 mb-16 border-b border-line pb-5"
+          >
+            <span className="font-mono text-sm text-signal">05</span>
             <h2
               id="contact-heading"
-              className="text-3xl sm:text-4xl font-bold gradient-text inline-block"
+              className="font-display font-black text-3xl sm:text-4xl text-ink"
             >
-              Get in Touch
+              Contact
             </h2>
-            <div
-              aria-hidden="true"
-              className="mt-4 w-16 h-0.5 mx-auto bg-gradient-to-r from-[#f472b6] to-[#7c4dff] rounded-full"
-            />
+            <span className="spec-label ml-auto hidden sm:inline">
+              Transmission channels
+            </span>
           </motion.div>
 
-          {/* Subtitle */}
+          {/* Big statement */}
           <motion.p
             variants={itemVariants}
-            className="text-[#9999b8] text-base leading-relaxed mb-12"
+            className="font-display text-[clamp(1.6rem,4vw,3rem)] leading-tight text-ink/90 max-w-3xl"
           >
-            I&apos;m currently open to internships, graduate roles, and interesting
-            collaborations. Feel free to reach out via any of the channels below.
+            Hiring for 2027 graduate roles or internships in Sydney?{" "}
+            <em className="italic text-signal">Let&apos;s talk.</em>
           </motion.p>
 
-          {/* Contact links */}
-          <motion.div
-            variants={containerVariants}
-            className="flex flex-col gap-3 mb-10"
-            role="list"
-            aria-label="Contact links"
-          >
-            {CONTACT_LINKS.map((link) => (
-              <motion.div key={link.label} variants={itemVariants} role="listitem">
-                <a
-                  href={link.href}
-                  target={link.href.startsWith("mailto") ? undefined : "_blank"}
-                  rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                  className={`flex items-center gap-4 p-4 glass-card rounded-xl border ${link.border} ${link.hoverBorder} ${link.hoverBg} transition-all duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4fc3f7]`}
-                  aria-label={`Contact via ${link.label}: ${link.value}${link.href.startsWith("mailto") ? "" : " (opens in new tab)"}`}
-                >
-                  <span className={`flex-shrink-0 ${link.accent}`}>{link.icon}</span>
-                  <div className="flex-1 text-left">
-                    <p className="text-xs text-[#9999b8] font-mono mb-0.5">{link.label}</p>
-                    <p className={`text-sm font-medium ${link.accent} group-hover:opacity-80 transition-opacity`}>
-                      {link.value}
-                    </p>
-                  </div>
-                  <svg
-                    aria-hidden="true"
-                    className="w-4 h-4 text-[#9999b8] group-hover:translate-x-1 transition-transform flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Download CV */}
-          <motion.div variants={itemVariants}>
+          {/* Giant email */}
+          <motion.div variants={itemVariants} className="mt-12">
             <a
-              href="/Seif_Ali_CV_v3.pdf"
-              download
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl font-semibold text-[#0a0a1a] bg-gradient-to-r from-[#4fc3f7] via-[#7c4dff] to-[#f472b6] hover:opacity-90 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a1a] shadow-glow-cyan"
-              aria-label="Download Seif Ali's CV as PDF"
+              href="mailto:seifarafa@hotmail.com"
+              className="group block font-display font-black text-[clamp(1.5rem,5.5vw,4.5rem)] leading-none tracking-tight text-ink hover:text-signal transition-colors duration-300 break-all focus:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+              aria-label="Email seifarafa@hotmail.com"
             >
-              <svg
-                aria-hidden="true"
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              Download CV
+              seifarafa@hotmail.com
+              <span className="inline-block ml-3 text-signal group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-300">
+                ↗
+              </span>
             </a>
           </motion.div>
 
-          {/* Footer note */}
-          <motion.p
+          {/* Channels + CV */}
+          <motion.div
             variants={itemVariants}
-            className="mt-12 text-xs text-[#9999b8]/60"
+            className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-end"
           >
-            Designed &amp; built by Seif Ali · {new Date().getFullYear()}
-          </motion.p>
+            <ul className="flex flex-col" role="list" aria-label="Contact channels">
+              {CHANNELS.map((ch) => (
+                <li key={ch.label}>
+                  <a
+                    href={ch.href}
+                    target={ch.external ? "_blank" : undefined}
+                    rel={ch.external ? "noopener noreferrer" : undefined}
+                    className="group flex items-baseline gap-6 border-b border-line py-4 hover:border-signal transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                    aria-label={`${ch.label}: ${ch.value}${ch.external ? " (opens in new tab)" : ""}`}
+                  >
+                    <span className="spec-label w-20 shrink-0">{ch.label}</span>
+                    <span className="font-mono text-sm text-ink/90 group-hover:text-signal transition-colors">
+                      {ch.value}
+                    </span>
+                    <span className="ml-auto font-mono text-xs text-muted group-hover:text-signal group-hover:translate-x-1 transition-all">
+                      →
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <div className="md:text-right">
+              <a
+                href="/Seif-Ali-CV.pdf"
+                download
+                className="inline-block bg-signal text-carbon font-mono text-xs tracking-[0.16em] uppercase px-8 py-4 hover:bg-ink transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-carbon"
+                aria-label="Download CV as PDF"
+              >
+                Download CV ↧
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Footer */}
+          <motion.footer
+            variants={itemVariants}
+            className="mt-24 border-t border-line py-8 flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between"
+          >
+            <p className="spec-label">
+              Designed &amp; built by Seif Ali — {new Date().getFullYear()}
+            </p>
+            <p className="spec-label">
+              Sydney, AU · 33.87°S — 151.21°E · End of document
+            </p>
+          </motion.footer>
         </motion.div>
       </div>
     </section>

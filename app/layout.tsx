@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fraunces, IBM_Plex_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -8,30 +9,41 @@ const geistSans = localFont({
   variable: "--font-geist-sans",
   weight: "100 900",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  axes: ["opsz", "SOFT", "WONK"],
+  weight: "variable",
+  style: ["normal", "italic"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "Seif Ali | Portfolio",
+  title: "Seif Ali — AI & Software Engineer",
   description:
-    "Computer Science student at the University of Wollongong specialising in AI and Big Data. Full-stack developer with a passion for machine learning and modern web technologies.",
+    "Final-year Computer Science student (AI & Big Data) at the University of Wollongong. Builds AI systems that run where the data lives — RAG pipelines, local-first tools, full-stack applications.",
   keywords: [
     "Seif Ali",
     "Computer Science",
     "AI",
     "Big Data",
+    "RAG",
     "University of Wollongong",
     "Portfolio",
-    "Full Stack Developer",
+    "Software Engineer",
+    "Sydney",
   ],
   authors: [{ name: "Seif Ali" }],
   openGraph: {
-    title: "Seif Ali | Portfolio",
+    title: "Seif Ali — AI & Software Engineer",
     description:
-      "Computer Science student at the University of Wollongong specialising in AI and Big Data.",
+      "Builds AI systems that run where the data lives. Final-year CS (AI & Big Data), University of Wollongong.",
     type: "website",
   },
 };
@@ -44,7 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0a0a1a] text-[#e8e8f0]`}
+        className={`${geistSans.variable} ${fraunces.variable} ${plexMono.variable} antialiased bg-carbon text-ink`}
       >
         <Navbar />
         {children}
