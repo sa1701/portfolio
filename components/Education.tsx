@@ -3,22 +3,16 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-const ENTRIES = [
+const CAMPUSES = [
   {
-    period: "2025 — Dec 2026",
-    status: "In progress",
-    title: "Bachelor of Computer Science — AI & Big Data",
-    place: "University of Wollongong · Wollongong, NSW, Australia",
-    detail:
-      "Transferred to the main campus to finish the degree in Australia. Coursework spans big data mining, generative AI, software methodologies, and a year-long capstone combining NLP with program analysis.",
+    period: "2025 — present",
+    place: "University of Wollongong — main campus",
+    location: "Wollongong, NSW, Australia",
   },
   {
-    period: "Feb 2023 — 2025",
-    status: "Completed",
-    title: "Bachelor of Computer Science — AI & Big Data",
-    place: "University of Wollongong in Dubai · Dubai, UAE",
-    detail:
-      "Commenced the degree at the Dubai campus: programming foundations, databases, cybersecurity, and IT project management before the transfer.",
+    period: "Sep 2023 — 2025",
+    place: "University of Wollongong in Dubai",
+    location: "Dubai, UAE",
   },
 ];
 
@@ -70,41 +64,65 @@ export default function Education() {
             </span>
           </motion.div>
 
-          {/* Ledger */}
-          <div role="list" aria-label="Education history">
-            {ENTRIES.map((entry, i) => (
-              <motion.article
-                key={entry.period}
-                variants={itemVariants}
-                role="listitem"
-                className={`group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-8 ${
-                  i < ENTRIES.length - 1 ? "border-b border-line" : ""
-                }`}
-              >
-                <div className="md:col-span-3">
-                  <p className="font-mono text-sm text-ink">{entry.period}</p>
-                  <p
-                    className={`spec-label mt-1.5 ${
-                      entry.status === "In progress" ? "!text-ok" : ""
-                    }`}
+          {/* Single degree, two campuses */}
+          <motion.article
+            variants={itemVariants}
+            className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8"
+            aria-label="Degree details"
+          >
+            <div className="md:col-span-3">
+              <p className="font-mono text-sm text-ink">Sep 2023 — Dec 2026</p>
+              <p className="spec-label mt-1.5 !text-ok">
+                In progress · graduating Dec 2026
+              </p>
+              <p className="spec-label mt-4">
+                UAC 754100
+                <br />
+                UOW course 766
+                <br />
+                BCompSci · 144 cp
+              </p>
+            </div>
+
+            <div className="md:col-span-9">
+              <h3 className="font-display font-bold text-xl sm:text-2xl text-ink">
+                Bachelor of Computer Science — Artificial Intelligence &amp; Big
+                Data
+              </h3>
+              <p className="font-mono text-xs text-signal/90 tracking-wide mt-2">
+                University of Wollongong · Faculty of Engineering &amp;
+                Information Sciences
+              </p>
+              <p className="text-muted text-sm leading-relaxed mt-3 max-w-2xl">
+                One degree, two campuses: commenced at UOW Dubai in September
+                2023, then transferred to the main Wollongong campus in 2025 to
+                finish in Australia. Coursework spans big data mining,
+                generative AI, software methodologies, cybersecurity, and a
+                year-long capstone combining NLP with program analysis.
+              </p>
+
+              {/* Campus ledger */}
+              <div className="mt-6 border-t border-line" role="list" aria-label="Campus history">
+                {CAMPUSES.map((c) => (
+                  <div
+                    key={c.period}
+                    role="listitem"
+                    className="grid grid-cols-1 sm:grid-cols-12 gap-1 sm:gap-6 py-3.5 border-b border-line"
                   >
-                    {entry.status}
-                  </p>
-                </div>
-                <div className="md:col-span-9">
-                  <h3 className="font-display font-bold text-xl sm:text-2xl text-ink group-hover:text-signal transition-colors duration-200">
-                    {entry.title}
-                  </h3>
-                  <p className="font-mono text-xs text-signal/90 tracking-wide mt-2">
-                    {entry.place}
-                  </p>
-                  <p className="text-muted text-sm leading-relaxed mt-3 max-w-2xl">
-                    {entry.detail}
-                  </p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
+                    <span className="sm:col-span-3 font-mono text-xs text-muted">
+                      {c.period}
+                    </span>
+                    <span className="sm:col-span-5 font-mono text-xs text-ink/85">
+                      {c.place}
+                    </span>
+                    <span className="sm:col-span-4 font-mono text-xs text-muted">
+                      {c.location}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.article>
         </motion.div>
       </div>
     </section>

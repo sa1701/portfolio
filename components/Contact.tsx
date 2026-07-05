@@ -1,7 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+
+const EMAIL = "seifarafa@hotmail.com";
 
 const CHANNELS = [
   {
@@ -41,6 +43,17 @@ const itemVariants = {
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard unavailable (very old browser / http) — the mailto link still works
+    }
+  };
 
   return (
     <section
@@ -93,6 +106,18 @@ export default function Contact() {
                 ↗
               </span>
             </a>
+            <button
+              onClick={copyEmail}
+              className={`mt-6 border px-5 py-3 font-mono text-xs tracking-[0.16em] uppercase transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-signal ${
+                copied
+                  ? "border-ok text-ok"
+                  : "border-line-strong text-ink hover:border-signal hover:text-signal"
+              }`}
+              aria-live="polite"
+              aria-label="Copy email address to clipboard"
+            >
+              {copied ? "Copied ✓" : "Copy email"}
+            </button>
           </motion.div>
 
           {/* Channels + CV */}
