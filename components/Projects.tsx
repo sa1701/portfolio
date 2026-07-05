@@ -11,7 +11,8 @@ interface Project {
   title: string;
   description: string;
   tech: string[];
-  github: string;
+  /** Omit for private repos — the card renders without GitHub links */
+  github?: string;
   liveUrl?: string;
   /** Hex accent colour, e.g. "#4fc3f7" */
   accentHex: string;
@@ -32,6 +33,39 @@ type Direction = "top" | "right" | "bottom" | "left";
 
 const PROJECTS: Project[] = [
   {
+    title: "GEARHEAD",
+    icon: "🚗",
+    accentHex: "#f87171",
+    accentText: "text-[#f87171]",
+    accentBorder: "border-[#f87171]/[0.15]",
+    shadowGlow: "shadow-glow-red",
+    description:
+      "Local-first AI car-diagnosis assistant grounded in real workshop manuals — describe a symptom or fault code, get interviewed like a mechanic, then a cited fix with the actual manual diagram. RAG over 22 service manuals (2,450 chunks) with page-level citations and multimodal diagram reading.",
+    tech: ["Python", "FastAPI", "RAG", "Multimodal LLM", "ChromaDB", "PyMuPDF"],
+  },
+  {
+    title: "ZynTrace",
+    icon: "🔍",
+    accentHex: "#4fc3f7",
+    accentText: "text-[#4fc3f7]",
+    accentBorder: "border-[#4fc3f7]/[0.15]",
+    shadowGlow: "shadow-glow-cyan",
+    description:
+      "Final-year capstone: an automated tool that diffs code changes against release notes to surface bugs, silently-patched security vulnerabilities, and cloned defects that update descriptions never mention. Combines program analysis with transformer-based NLP, evaluated on CVE-fixing commit corpora.",
+    tech: ["Python", "NLP", "Program Analysis", "Transformers"],
+  },
+  {
+    title: "Talent Matching Platform",
+    icon: "🎯",
+    accentHex: "#7c4dff",
+    accentText: "text-[#7c4dff]",
+    accentBorder: "border-[#7c4dff]/[0.15]",
+    shadowGlow: "shadow-glow-purple",
+    description:
+      "Intelligent job–candidate matching platform built by a five-person team (backend role). Weighted 55-point recommendation engine, fuzzy keyword search with Levenshtein + Soundex, and a GitHub Actions CI pipeline running lint and PHPUnit on every push.",
+    tech: ["PHP 8", "MySQL", "PHPUnit", "GitHub Actions CI"],
+  },
+  {
     title: "RAG PDF Chat",
     icon: "🤖",
     accentHex: "#34d399",
@@ -42,19 +76,6 @@ const PROJECTS: Project[] = [
       "Privacy-first AI document Q&A — upload any PDF and ask questions. Uses FAISS vector search and local LLMs via Ollama. No API keys, no data leaves your machine.",
     tech: ["Python", "LangChain", "FAISS", "sentence-transformers", "Ollama", "Streamlit"],
     github: "https://github.com/sa1701/rag-pdf-chat",
-  },
-  {
-    title: "TaskFlow",
-    icon: "📋",
-    accentHex: "#6366f1",
-    accentText: "text-[#6366f1]",
-    accentBorder: "border-[#6366f1]/[0.15]",
-    shadowGlow: "shadow-glow-indigo",
-    description:
-      "Full-stack kanban task manager with drag-and-drop, priority labels, multi-project support, and JWT authentication. Live on Vercel.",
-    tech: ["Next.js 16", "Supabase", "Prisma", "NextAuth.js", "Tailwind CSS", "TypeScript"],
-    github: "https://github.com/sa1701/taskflow",
-    liveUrl: "https://taskflow-one-red.vercel.app",
   },
   {
     title: "Command Center",
@@ -70,40 +91,29 @@ const PROJECTS: Project[] = [
     liveUrl: "https://dashboard-omega-ivory-98.vercel.app",
   },
   {
-    title: "Local AI Text Summariser",
-    icon: "📝",
-    accentHex: "#fb923c",
-    accentText: "text-[#fb923c]",
-    accentBorder: "border-[#fb923c]/[0.15]",
-    shadowGlow: "shadow-glow-orange",
+    title: "TaskFlow",
+    icon: "📋",
+    accentHex: "#6366f1",
+    accentText: "text-[#6366f1]",
+    accentBorder: "border-[#6366f1]/[0.15]",
+    shadowGlow: "shadow-glow-indigo",
     description:
-      "Summarise any text using locally-running LLMs — no API keys or internet required. Supports Mistral and LLaMA 3.2 with live streaming and 3 summary styles.",
-    tech: ["Python", "Streamlit", "Ollama", "Mistral", "LLaMA 3.2"],
-    github: "https://github.com/sa1701/text-summarizer-",
+      "Full-stack kanban task manager with drag-and-drop, priority labels, multi-project support, and JWT authentication. Live on Vercel.",
+    tech: ["Next.js 16", "Supabase", "Prisma", "NextAuth.js", "Tailwind CSS", "TypeScript"],
+    github: "https://github.com/sa1701/taskflow",
+    liveUrl: "https://taskflow-one-red.vercel.app",
   },
   {
-    title: "Recipe Web App",
-    icon: "🍽",
-    accentHex: "#4fc3f7",
-    accentText: "text-[#4fc3f7]",
-    accentBorder: "border-[#4fc3f7]/[0.15]",
-    shadowGlow: "shadow-glow-cyan",
+    title: "Big Data ML",
+    icon: "📊",
+    accentHex: "#2dd4bf",
+    accentText: "text-[#2dd4bf]",
+    accentBorder: "border-[#2dd4bf]/[0.15]",
+    shadowGlow: "shadow-glow-teal",
     description:
-      "Full-stack recipe application supporting multi-cuisine filtering, keyword search, and a fully responsive interface.",
-    tech: ["Node.js", "MySQL", "HTML", "CSS", "JavaScript"],
-    github: "https://github.com/sa1701/recipe-web-app",
-  },
-  {
-    title: "Employee Management System",
-    icon: "👥",
-    accentHex: "#7c4dff",
-    accentText: "text-[#7c4dff]",
-    accentBorder: "border-[#7c4dff]/[0.15]",
-    shadowGlow: "shadow-glow-purple",
-    description:
-      "Enterprise HR tool with session-based authentication, full CRUD operations, and role-aware access control.",
-    tech: ["Node.js", "Express", "MySQL", "Session Auth", "HTML/CSS"],
-    github: "https://github.com/sa1701/employee-management-system",
+      "Decision tree classifier built from scratch (info gain + Gini impurity) with weighted ensemble methods. Applied to UCI Heart Disease and Solar Flare datasets.",
+    tech: ["Python", "scikit-learn", "pandas", "NumPy", "Jupyter"],
+    github: "https://github.com/sa1701/big-data-ml",
   },
   {
     title: "ai-commit",
@@ -118,28 +128,16 @@ const PROJECTS: Project[] = [
     github: "https://github.com/sa1701/ai-commit",
   },
   {
-    title: "Notebook CLI",
-    icon: "🗒️",
-    accentHex: "#2dd4bf",
-    accentText: "text-[#2dd4bf]",
-    accentBorder: "border-[#2dd4bf]/[0.15]",
-    shadowGlow: "shadow-glow-teal",
+    title: "Local AI Text Summariser",
+    icon: "📝",
+    accentHex: "#fb923c",
+    accentText: "text-[#fb923c]",
+    accentBorder: "border-[#fb923c]/[0.15]",
+    shadowGlow: "shadow-glow-orange",
     description:
-      "Command-line note-taking app with tag-based search, persistent JSON storage, and a clean menu-driven interface. Built with OOP principles.",
-    tech: ["Python", "OOP", "JSON"],
-    github: "https://github.com/sa1701/notebook-cli",
-  },
-  {
-    title: "Big Data ML",
-    icon: "📊",
-    accentHex: "#f87171",
-    accentText: "text-[#f87171]",
-    accentBorder: "border-[#f87171]/[0.15]",
-    shadowGlow: "shadow-glow-red",
-    description:
-      "Decision tree classifier built from scratch (info gain + Gini impurity) with weighted ensemble methods. Applied to UCI Heart Disease and Solar Flare datasets.",
-    tech: ["Python", "scikit-learn", "pandas", "NumPy", "Jupyter"],
-    github: "https://github.com/sa1701/big-data-ml",
+      "Summarise any text using locally-running LLMs — no API keys or internet required. Supports Mistral and LLaMA 3.2 with live streaming and 3 summary styles.",
+    tech: ["Python", "Streamlit", "Ollama", "Mistral", "LLaMA 3.2"],
+    github: "https://github.com/sa1701/text-summarizer-",
   },
 ];
 
@@ -452,6 +450,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                 Live ↗
               </a>
             )}
+            {project.github && (
             <a
               href={project.github}
               target="_blank"
@@ -468,6 +467,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                 <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
               </svg>
             </a>
+            )}
             </div>
           </div>
 
@@ -504,6 +504,7 @@ function ProjectCard({ project }: ProjectCardProps) {
           </div>
 
           {/* Footer CTA */}
+          {project.github ? (
           <a
             href={project.github}
             target="_blank"
@@ -531,6 +532,11 @@ function ProjectCard({ project }: ProjectCardProps) {
               />
             </motion.svg>
           </a>
+          ) : (
+          <span className="inline-flex items-center gap-1.5 text-sm font-medium text-[#9999b8] w-fit">
+            Private repo — available on request
+          </span>
+          )}
         </div>
       </div>
     </TiltCard>
