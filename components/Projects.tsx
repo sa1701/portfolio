@@ -29,6 +29,15 @@ const PROJECTS: Project[] = [
     github: "https://github.com/sa1701/gearhead",
   },
   {
+    title: "Sydney Tech Pulse",
+    designation: "Live job-market data pipeline",
+    description:
+      "Which skills are Sydney tech employers actually hiring for? A scheduled ELT pipeline pulls postings daily, extracts skills with a 90-pattern taxonomy, and loads Postgres — analytics views feed a live trends dashboard. Raw SQL, idempotent upserts, RLS, CI against a real Postgres container. Zero running cost.",
+    tech: ["Python", "PostgreSQL", "Docker", "GitHub Actions", "Next.js", "Supabase"],
+    github: "https://github.com/sa1701/sydney-tech-pulse",
+    liveUrl: "https://sydney-tech-pulse.vercel.app",
+  },
+  {
     title: "ZynTrace",
     designation: "Software update tracing — capstone",
     description:
