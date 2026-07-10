@@ -26,7 +26,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://portfolio-delta-blush-95.vercel.app"),
+  metadataBase: new URL("https://seifali.dev"),
   title: "Seif Ali — AI & Software Engineer",
   description:
     "Final-year Computer Science student (AI & Big Data) at the University of Wollongong. Builds AI systems that run where the data lives — RAG pipelines, local-first tools, full-stack applications.",
