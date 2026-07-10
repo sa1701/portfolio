@@ -23,6 +23,16 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Lenis drives the scroll when active — kill native smooth so they don't
+   fight over the same frame */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
 body {
   /* Font vars are defined on <body> by next/font, so the family must be set
      here — Tailwind's preflight sets it on <html>, where the vars don't

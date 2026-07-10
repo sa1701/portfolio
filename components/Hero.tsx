@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { scrollToId } from "@/components/SmoothScroll";
 
 const TICKER = [
   "Python",
@@ -27,10 +28,7 @@ const rise = {
 };
 
 export default function Hero() {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollTo = (id: string) => scrollToId(id);
 
   return (
     <section

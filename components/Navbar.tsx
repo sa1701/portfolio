@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { scrollToId } from "@/components/SmoothScroll";
 
 const NAV_LINKS = [
   { index: "01", label: "Profile", href: "#about" },
@@ -39,8 +40,7 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
-    const el = document.getElementById(href.replace("#", ""));
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    scrollToId(href.replace("#", ""));
   };
 
   return (
@@ -67,7 +67,7 @@ export default function Navbar() {
           href="#"
           onClick={(e) => {
             e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            scrollToId();
           }}
           className="font-mono text-sm tracking-[0.2em] uppercase text-ink hover:text-signal transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-signal rounded-sm"
           aria-label="Seif Ali — scroll to top"

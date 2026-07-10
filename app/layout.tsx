@@ -3,6 +3,7 @@ import { Fraunces, IBM_Plex_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${fraunces.variable} ${plexMono.variable} antialiased bg-carbon text-ink`}
       >
+        <SmoothScroll />
         <Navbar />
         {children}
       </body>
