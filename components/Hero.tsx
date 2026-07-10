@@ -48,7 +48,7 @@ export default function Hero() {
           33.87°S — 151.21°E
         </span>
         <span className="spec-label absolute bottom-24 left-6 lg:left-10">
-          Sheet 01 / 05
+          Sheet 01 / 06
         </span>
         {/* Registration crosses */}
         <span className="absolute top-[4.5rem] left-1/2 -translate-x-1/2 text-muted/40 font-mono text-xs">

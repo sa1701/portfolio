@@ -6,9 +6,10 @@ import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 const NAV_LINKS = [
   { index: "01", label: "Profile", href: "#about" },
   { index: "02", label: "Work", href: "#projects" },
-  { index: "03", label: "Stack", href: "#skills" },
-  { index: "04", label: "Education", href: "#education" },
-  { index: "05", label: "Contact", href: "#contact" },
+  { index: "03", label: "Case File", href: "#gearhead" },
+  { index: "04", label: "Stack", href: "#skills" },
+  { index: "05", label: "Education", href: "#education" },
+  { index: "06", label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {

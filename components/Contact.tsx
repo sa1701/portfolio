@@ -73,7 +73,7 @@ export default function Contact() {
             variants={itemVariants}
             className="flex items-baseline gap-4 mb-16 border-b border-line pb-5"
           >
-            <span className="font-mono text-sm text-signal">05</span>
+            <span className="font-mono text-sm text-signal">06</span>
             <h2
               id="contact-heading"
               className="font-display font-black text-3xl sm:text-4xl text-ink"

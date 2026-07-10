@@ -7,63 +7,58 @@ import { motion, useInView } from "framer-motion";
 // Types & data
 // ---------------------------------------------------------------------------
 
-interface Project {
+interface IndexProject {
   title: string;
   designation: string;
-  description: string;
+  /** Right-column domain tag — maps the work back to the AI & Big Data major */
+  domain: string;
+  blurb: string;
+  /** One line of hard numbers shown on the hover plate */
+  metric: string;
   tech: string[];
-  /** Omit for private repos — the card renders "available on request" */
+  /** Omit for private repos — the row renders "available on request" */
   github?: string;
   liveUrl?: string;
-  featured?: boolean;
 }
 
-const PROJECTS: Project[] = [
+const MAIN: IndexProject[] = [
   {
     title: "GEARHEAD",
     designation: "Local-first AI car diagnosis",
-    featured: true,
-    description:
-      "Describe a symptom or fault code, get interviewed like a mechanic, then receive a cited fix with the actual workshop-manual diagram. RAG over 22 service manuals (2,450 indexed chunks) with page-level citations on every answer — running on the Claude API or 100% offline on a local Ollama model, switched with one env var. Designed so adding a car is as simple as dropping in a PDF.",
-    tech: ["Python", "FastAPI", "RAG", "Ollama", "ChromaDB", "PyMuPDF"],
+    domain: "AI / RAG",
+    blurb:
+      "Describe a fault, get interviewed like a mechanic, receive a cited fix with the workshop manual's own diagram — on the Claude API or fully offline.",
+    metric: "22 manuals · 2,450 indexed chunks",
+    tech: ["Python", "FastAPI", "RAG", "Ollama", "ChromaDB"],
     github: "https://github.com/sa1701/gearhead",
   },
   {
     title: "Sydney Tech Pulse",
     designation: "Live job-market data pipeline",
-    description:
-      "Which skills are Sydney tech employers actually hiring for? A scheduled ELT pipeline pulls postings daily, extracts skills with a 90-pattern taxonomy, and loads Postgres — analytics views feed a live trends dashboard. Raw SQL, idempotent upserts, RLS, CI against a real Postgres container. Zero running cost.",
-    tech: ["Python", "PostgreSQL", "Docker", "GitHub Actions", "Next.js", "Supabase"],
+    domain: "Data Eng",
+    blurb:
+      "Daily ELT pipeline that mines Sydney job postings for the skills employers actually hire for, loading Postgres views behind a live trends dashboard.",
+    metric: "90-pattern skill taxonomy · $0/mo to run",
+    tech: ["Python", "PostgreSQL", "Docker", "GitHub Actions", "Supabase"],
     github: "https://github.com/sa1701/sydney-tech-pulse",
     liveUrl: "https://sydney-tech-pulse.vercel.app",
   },
   {
     title: "ZynTrace",
     designation: "Software update tracing — capstone",
-    description:
-      "Diffs code changes against release notes to surface bugs, silently-patched security vulnerabilities, and cloned defects that update descriptions never mention. Program analysis × transformer-based NLP, evaluated on CVE-fixing commit corpora.",
+    domain: "NLP × Sec",
+    blurb:
+      "Diffs code changes against release notes to surface silently-patched vulnerabilities and cloned defects that update descriptions never mention.",
+    metric: "Program analysis × transformer NLP",
     tech: ["Python", "NLP", "Program Analysis", "Transformers"],
-  },
-  {
-    title: "Talent Matching Platform",
-    designation: "Team project — backend",
-    description:
-      "Job–candidate matching engine built by a five-person team. Weighted 55-point recommendation scoring, fuzzy search with Levenshtein + Soundex, and CI running lint and PHPUnit on every push.",
-    tech: ["PHP 8", "MySQL", "PHPUnit", "GitHub Actions"],
-  },
-  {
-    title: "RAG PDF Chat",
-    designation: "Privacy-first document Q&A",
-    description:
-      "Upload any PDF and ask questions — cited answers from a locally-hosted LLM. FAISS vector search, no API keys, no data leaves the machine.",
-    tech: ["Python", "LangChain", "FAISS", "Ollama", "Streamlit"],
-    github: "https://github.com/sa1701/rag-pdf-chat",
   },
   {
     title: "Command Center",
     designation: "Productivity dashboard",
-    description:
-      "16-widget dashboard with Notion sync, drag-and-drop layout, and a Ctrl+K command palette. Timetable, workout tracker, prayer times, Pomodoro.",
+    domain: "Full-Stack",
+    blurb:
+      "Everything-dashboard with Notion sync, drag-and-drop layout, and a Ctrl+K command palette — timetable, workouts, prayer times, Pomodoro.",
+    metric: "16 widgets · Notion API sync",
     tech: ["Next.js", "TypeScript", "Zustand", "Notion API"],
     github: "https://github.com/sa1701/command-center",
     liveUrl: "https://dashboard-omega-ivory-98.vercel.app",
@@ -71,33 +66,63 @@ const PROJECTS: Project[] = [
   {
     title: "TaskFlow",
     designation: "Full-stack kanban",
-    description:
-      "Kanban task manager with drag-and-drop, priority labels, multi-project support, and JWT authentication. Live on Vercel.",
+    domain: "Full-Stack",
+    blurb:
+      "Kanban task manager with drag-and-drop, priority labels, multi-project boards, and JWT authentication.",
+    metric: "Auth + DB + deploy, end to end",
     tech: ["Next.js", "Supabase", "Prisma", "NextAuth.js"],
     github: "https://github.com/sa1701/taskflow",
     liveUrl: "https://taskflow-one-red.vercel.app",
   },
   {
+    title: "Talent Matching Platform",
+    designation: "Team project — backend",
+    domain: "Backend",
+    blurb:
+      "Job–candidate matching engine built by a five-person team. Owned the backend: weighted recommendation scoring and fuzzy search.",
+    metric: "55-point scoring · CI on every push",
+    tech: ["PHP 8", "MySQL", "PHPUnit", "GitHub Actions"],
+  },
+];
+
+const ARCHIVE: IndexProject[] = [
+  {
+    title: "RAG PDF Chat",
+    designation: "Privacy-first document Q&A",
+    domain: "AI / RAG",
+    blurb:
+      "Upload any PDF, ask questions, get cited answers from a locally-hosted LLM. No API keys, no data leaves the machine.",
+    metric: "FAISS vector search · zero cloud",
+    tech: ["Python", "LangChain", "FAISS", "Ollama"],
+    github: "https://github.com/sa1701/rag-pdf-chat",
+  },
+  {
     title: "Big Data ML",
     designation: "Classifiers from first principles",
-    description:
+    domain: "ML",
+    blurb:
       "Decision-tree classifiers written from scratch (information gain + Gini) with weighted ensembling, applied to UCI datasets.",
-    tech: ["Python", "scikit-learn", "pandas", "NumPy"],
+    metric: "No sklearn.fit() in sight",
+    tech: ["Python", "pandas", "NumPy"],
     github: "https://github.com/sa1701/big-data-ml",
   },
   {
     title: "ai-commit",
     designation: "CLI tooling",
-    description:
-      "Generates conventional git commit messages from staged diffs using a local Ollama LLM. Model selection, dry-run mode, inline editing.",
-    tech: ["Python", "Click", "Ollama", "Git"],
+    domain: "Dev Tools",
+    blurb:
+      "Generates conventional git commit messages from staged diffs using a local Ollama LLM.",
+    metric: "Local LLM · dry-run · inline edit",
+    tech: ["Python", "Click", "Ollama"],
     github: "https://github.com/sa1701/ai-commit",
   },
   {
     title: "Text Summariser",
     designation: "Local AI utility",
-    description:
+    domain: "AI",
+    blurb:
       "Summarises any text with locally-running LLMs — streaming output, three summary styles, zero API keys.",
+    metric: "Streaming · 3 styles · offline",
     tech: ["Python", "Streamlit", "Ollama"],
     github: "https://github.com/sa1701/text-summarizer-",
   },
@@ -122,10 +147,10 @@ const itemVariants = {
 };
 
 // ---------------------------------------------------------------------------
-// Card pieces
+// Pieces
 // ---------------------------------------------------------------------------
 
-function CardLinks({ project }: { project: Project }) {
+function RowLinks({ project }: { project: IndexProject }) {
   if (!project.github && !project.liveUrl) {
     return (
       <span className="font-mono text-xs text-muted tracking-wide">
@@ -180,6 +205,94 @@ function TechList({ tech }: { tech: string[] }) {
   );
 }
 
+/**
+ * Floating "data plate" revealed on row hover/focus — the drafting-sheet
+ * answer to a screenshot thumbnail. Desktop only; mobile gets the same
+ * content inline.
+ */
+function DataPlate({ project }: { project: IndexProject }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none hidden lg:block absolute right-4 top-1/2 z-20 w-[22rem] -translate-y-1/2 translate-x-6 rotate-[2.5deg] opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:rotate-0 group-hover:opacity-100 group-focus-within:translate-x-0 group-focus-within:rotate-0 group-focus-within:opacity-100"
+    >
+      <div className="panel border-line-strong p-6 shadow-[0_24px_60px_rgba(0,0,0,0.6)]">
+        <p className="spec-label !text-signal">{project.designation}</p>
+        <p className="mt-3 text-sm text-ink/90 leading-relaxed">{project.blurb}</p>
+        <p className="mt-4 font-mono text-xs tracking-[0.08em] text-signal border-t border-line pt-3">
+          {project.metric}
+        </p>
+        <div className="mt-3">
+          <TechList tech={project.tech} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function IndexRow({ project, index }: { project: IndexProject; index: number }) {
+  const num = String(index + 1).padStart(2, "0");
+  const primary = project.liveUrl ?? project.github;
+
+  return (
+    <motion.article
+      variants={itemVariants}
+      role="listitem"
+      className="group relative border-b border-line"
+    >
+      <div className="py-7 lg:py-9 grid grid-cols-1 lg:grid-cols-12 lg:items-baseline gap-x-6 gap-y-3">
+        {/* Index */}
+        <span
+          className="lg:col-span-1 font-mono text-sm text-muted group-hover:text-signal transition-colors"
+          aria-hidden="true"
+        >
+          {num}
+        </span>
+
+        {/* Title */}
+        <h3 className="lg:col-span-7 font-display font-black leading-[0.95] tracking-tight text-[clamp(2rem,5.5vw,4.25rem)] text-ink group-hover:text-signal transition-colors duration-200">
+          {primary ? (
+            <a
+              href={primary}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus:outline-none focus-visible:ring-2 focus-visible:ring-signal rounded-sm"
+              aria-label={`${project.title} — ${project.designation} (opens in new tab)`}
+            >
+              {project.title}
+              <span className="ml-3 inline-block text-[0.4em] align-[0.6em] text-muted group-hover:text-signal group-hover:-translate-y-1 group-hover:translate-x-1 transition-all">
+                ↗
+              </span>
+            </a>
+          ) : (
+            project.title
+          )}
+        </h3>
+
+        {/* Designation */}
+        <p className="lg:col-span-3 spec-label lg:text-right lg:self-center">
+          {project.designation}
+        </p>
+
+        {/* Domain tag */}
+        <span className="lg:col-span-1 font-mono text-xs tracking-[0.14em] uppercase text-signal/80 lg:text-right lg:self-center whitespace-nowrap">
+          {project.domain}
+        </span>
+
+        {/* Mobile / small-screen detail (the data plate content, inline) */}
+        <div className="lg:hidden col-span-full flex flex-col gap-3 pt-1">
+          <p className="text-muted text-sm leading-relaxed">{project.blurb}</p>
+          <p className="font-mono text-xs text-signal">{project.metric}</p>
+          <TechList tech={project.tech} />
+          <RowLinks project={project} />
+        </div>
+      </div>
+
+      <DataPlate project={project} />
+    </motion.article>
+  );
+}
+
 // ---------------------------------------------------------------------------
 // Section
 // ---------------------------------------------------------------------------
@@ -187,9 +300,6 @@ function TechList({ tech }: { tech: string[] }) {
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
-
-  const featured = PROJECTS.find((p) => p.featured);
-  const rest = PROJECTS.filter((p) => !p.featured);
 
   return (
     <section
@@ -207,7 +317,7 @@ export default function Projects() {
           {/* Section header */}
           <motion.div
             variants={itemVariants}
-            className="flex items-baseline gap-4 mb-16 border-b border-line pb-5"
+            className="flex items-baseline gap-4 mb-6 border-b border-line pb-5"
           >
             <span className="font-mono text-sm text-signal">02</span>
             <h2
@@ -217,81 +327,59 @@ export default function Projects() {
               Selected Work
             </h2>
             <span className="spec-label ml-auto hidden sm:inline">
-              {String(PROJECTS.length).padStart(2, "0")} entries
+              {String(MAIN.length).padStart(2, "0")} entries — hover for spec
             </span>
           </motion.div>
 
-          <div role="list" aria-label="Projects">
-            {/* Featured entry */}
-            {featured && (
+          {/* Typographic index */}
+          <div role="list" aria-label="Selected projects">
+            {MAIN.map((project, i) => (
+              <IndexRow key={project.title} project={project} index={i} />
+            ))}
+          </div>
+
+          {/* Archive */}
+          <motion.div
+            variants={itemVariants}
+            className="flex items-baseline gap-4 mt-20 mb-6 border-b border-line pb-4"
+          >
+            <h3 className="spec-label !text-ink">Archive</h3>
+            <span className="spec-label ml-auto hidden sm:inline">
+              Smaller builds &amp; tooling
+            </span>
+          </motion.div>
+
+          <div
+            role="list"
+            aria-label="Archive projects"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            {ARCHIVE.map((project) => (
               <motion.article
+                key={project.title}
                 variants={itemVariants}
                 role="listitem"
-                className="panel ticks mb-6 group"
+                className="panel ticks group flex flex-col"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12">
-                  {/* Index gutter */}
-                  <div className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-line p-7 flex lg:flex-col justify-between gap-4">
-                    <span
-                      className="font-display font-black text-[clamp(3rem,6vw,5.5rem)] leading-none text-signal"
-                      aria-hidden="true"
-                    >
-                      01
-                    </span>
-                    <span className="spec-label self-end lg:self-start">
-                      Flagship build
-                    </span>
-                  </div>
-                  {/* Body */}
-                  <div className="lg:col-span-9 p-7 lg:p-9 flex flex-col gap-5">
-                    <div>
-                      <h3 className="font-display font-black text-2xl sm:text-3xl text-ink group-hover:text-signal transition-colors duration-200">
-                        {featured.title}
-                      </h3>
-                      <p className="spec-label mt-2">{featured.designation}</p>
-                    </div>
-                    <p className="text-muted leading-relaxed max-w-3xl">
-                      {featured.description}
-                    </p>
-                    <TechList tech={featured.tech} />
-                    <div className="pt-2 border-t border-line mt-auto pt-4">
-                      <CardLinks project={featured} />
-                    </div>
+                <div className="border-b border-line px-6 py-4 flex items-baseline justify-between gap-4">
+                  <h4 className="font-display font-bold text-xl text-ink group-hover:text-signal transition-colors duration-200">
+                    {project.title}
+                  </h4>
+                  <span className="font-mono text-xs tracking-[0.14em] uppercase text-signal/80 whitespace-nowrap">
+                    {project.domain}
+                  </span>
+                </div>
+                <div className="p-6 flex flex-col gap-4 flex-1">
+                  <p className="text-muted text-sm leading-relaxed flex-1">
+                    {project.blurb}
+                  </p>
+                  <TechList tech={project.tech} />
+                  <div className="border-t border-line pt-4">
+                    <RowLinks project={project} />
                   </div>
                 </div>
               </motion.article>
-            )}
-
-            {/* Grid entries */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {rest.map((project, i) => (
-                <motion.article
-                  key={project.title}
-                  variants={itemVariants}
-                  role="listitem"
-                  className="panel ticks group flex flex-col"
-                >
-                  <div className="border-b border-line px-6 py-4 flex items-baseline justify-between gap-4">
-                    <h3 className="font-display font-bold text-xl text-ink group-hover:text-signal transition-colors duration-200">
-                      {project.title}
-                    </h3>
-                    <span className="font-mono text-xs text-muted" aria-hidden="true">
-                      {String(i + 2).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <div className="p-6 flex flex-col gap-4 flex-1">
-                    <p className="spec-label">{project.designation}</p>
-                    <p className="text-muted text-sm leading-relaxed flex-1">
-                      {project.description}
-                    </p>
-                    <TechList tech={project.tech} />
-                    <div className="border-t border-line pt-4">
-                      <CardLinks project={project} />
-                    </div>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
+            ))}
           </div>
 
           {/* Footer link */}
