@@ -1,57 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 
 const EMAIL = "seifarafa@hotmail.com";
-
-/** Rotating sign-off lines — Arabic where it's funnier in Arabic */
-const SIGN_OFFS = [
-  <>
-    <span className="text-signal">شغال على جهازي</span> — works on my machine.
-    For once, that&apos;s the whole point.
-  </>,
-  <>
-    while (!hired) {"{"} <span className="text-signal">build()</span>; {"}"}
-  </>,
-  <>
-    git commit -m &quot;<span className="text-signal">خلص، والحمد لله</span>&quot;
-  </>,
-  <>
-    In God we trust — <span className="text-signal">الباقي يجيب data</span>.
-  </>,
-];
-
-function SignOff() {
-  const [index, setIndex] = useState(0);
-  const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (reduceMotion) return;
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % SIGN_OFFS.length);
-    }, 5000);
-    return () => clearInterval(id);
-  }, [reduceMotion]);
-
-  return (
-    <div className="mt-24 text-center" aria-hidden="true">
-      <AnimatePresence mode="wait">
-        <motion.p
-          key={index}
-          dir="auto"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
-          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="font-mono text-sm sm:text-base text-muted"
-        >
-          {SIGN_OFFS[index]}
-        </motion.p>
-      </AnimatePresence>
-    </div>
-  );
-}
 
 const CHANNELS = [
   {
@@ -207,13 +159,10 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Rotating sign-off */}
-          <SignOff />
-
           {/* Footer */}
           <motion.footer
             variants={itemVariants}
-            className="mt-10 border-t border-line py-8 flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between"
+            className="mt-24 border-t border-line py-8 flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between"
           >
             <p className="spec-label">
               Designed &amp; built by Seif Ali — {new Date().getFullYear()}
