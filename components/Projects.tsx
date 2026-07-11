@@ -102,7 +102,7 @@ const ARCHIVE: IndexProject[] = [
     domain: "ML",
     blurb:
       "Decision-tree classifiers written from scratch (information gain + Gini) with weighted ensembling, applied to UCI datasets.",
-    metric: "No sklearn.fit() in sight",
+    metric: "Information gain + Gini, from scratch",
     tech: ["Python", "pandas", "NumPy"],
     github: "https://github.com/sa1701/big-data-ml",
   },
